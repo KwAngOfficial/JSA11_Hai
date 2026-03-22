@@ -1,0 +1,145 @@
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #f0f2f5;
+}
+
+.auth-box {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.tab-header {
+    display: flex;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #eee;
+}
+
+.tab-header button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-weight: bold;
+    color: #888;
+}
+
+.tab-header button.active {
+    color: #3498db;
+    border-bottom: 2px solid #3498db;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.auth-form h2 {
+    margin-bottom: 10px;
+    font-size: 22px;
+}
+
+.auth-form input {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+}
+
+.btn-primary {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.hidden { display: none; }
+.hint { font-size: 12px; color: #e67e22; text-align: center; }
+
+.tab-header {
+    display: flex;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #eee;
+    position: relative; /* Thêm dòng này */
+    z-index: 10; /* Đảm bảo nó luôn nằm trên cùng */
+}
+
+.tab-header button {
+    flex: 1;
+    padding: 15px 10px; /* Tăng padding để vùng bấm rộng hơn */
+    border: none;
+    background: none;
+    cursor: pointer; /* Bắt buộc phải có để hiện bàn tay khi di chuột vào */
+    font-weight: bold;
+    color: #888;
+    outline: none;
+    transition: 0.3s;
+}
+
+.tab-header button.active {
+    color: #3498db;
+    border-bottom: 3px solid #3498db; /* Làm thanh gạch chân dày hơn một chút */
+}
+
+.error-text {
+    font-size: 13px;
+    margin: 5px 0;
+    text-align: center;
+    min-height: 20px;
+    font-weight: bold;
+    color: #e74c3c; /* Màu đỏ của dòng lỗi */
+}
+
+/* Container chứa các thông báo */
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+/* Kiểu dáng của từng mẩu tin nhắn */
+.toast {
+    min-width: 250px;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    animation: slideIn 0.4s ease forwards;
+}
+
+/* Màu sắc cho từng loại thông báo */
+.toast.success { background-color: #27ae60; border-left: 5px solid #1e8449; }
+.toast.error { background-color: #e74c3c; border-left: 5px solid #c0392b; }
+.toast.info { background-color: #3498db; border-left: 5px solid #2980b9; }
+
+/* Hiệu ứng bay từ phải vào */
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Hiệu ứng biến mất */
+.toast.hide {
+    animation: slideOut 0.4s ease forwards;
+}
+
+@keyframes slideOut {
+    to { transform: translateX(100%); opacity: 0; }
+}
