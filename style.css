@@ -1,0 +1,368 @@
+/* --- 1. RESET CSS CƠ BẢN --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* --- 2. THANH HEADER ĐIỀU HƯỚNG --- */
+.main-header {
+    background: white;
+    padding: 15px 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    position: sticky; /* Cố định header khi cuộn chuột */
+    top: 0;
+    z-index: 1000;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+/* --- 2a. LOGO GEMINI SHOP --- */
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.icon-gem { color: #3498db; } /* Màu xanh cho icon kim cương */
+.logo span { color: #3498db; }
+
+/* --- 2b. THANH TÌM KIẾM (SEARCH BAR) --- */
+.search-bar {
+    display: flex;
+    flex: 1; /* Lấy phần diện tích trống còn lại */
+    max-width: 500px;
+    border: 1px solid #ddd;
+    border-radius: 25px; /* Làm bo tròn */
+    overflow: hidden;
+}
+
+.search-bar input {
+    flex: 1;
+    border: none;
+    padding: 10px 15px;
+    outline: none;
+}
+
+.search-bar button {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.search-bar button:hover { background: #2980b9; }
+
+/* --- 2c. NHÓM ICON CHỨC NĂNG --- */
+.action-icons {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.icon-link {
+    display: flex;
+    flex-direction: column; /* Chữ nằm dưới icon */
+    align-items: center;
+    text-decoration: none;
+    color: #555;
+    position: relative; /* Để cart-badge có thể định vị relative */
+}
+
+.icon-link i {
+    font-size: 24px;
+    margin-bottom: 3px;
+    transition: color 0.3s;
+}
+
+.icon-link:hover i { color: #3498db; }
+.icon-text { font-size: 12px; }
+
+/* Badge số lượng sản phẩm (Giỏ hàng) */
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: 3px;
+    background: #e74c3c;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- 3. PHẦN CHÍNH (MAIN CONTENT) & LƯỚI SẢN PHẨM --- */
+.main-content {
+    padding: 30px 20px;
+}
+
+#shop-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Thẻ sản phẩm */
+.card {
+    background: #fff;
+    border: 1px solid #f1f1f1;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+.card .category {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+.card h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    height: 45px;
+    overflow: hidden;
+    display: -webkit-box;
+    
+    -webkit-box-orient: vertical;
+}
+
+.card .price {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-top: auto;
+}
+
+.btn-buy {
+    background: #2ecc71;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+.btn-buy:hover { background: #27ae60; }
+/* Modal Background */
+.modal {
+    display: none; /* Ẩn mặc định */
+    position: fixed;
+    z-index: 2000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    backdrop-filter: blur(5px);
+}
+
+/* Nội dung Modal */
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 20px;
+    width: 80%;
+    max-width: 900px;
+    position: relative;
+    animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.close-modal {
+    position: absolute;
+    right: 20px; top: 10px;
+    font-size: 30px; cursor: pointer; color: #888;
+}
+
+.modal-body { display: flex; gap: 40px; align-items: center; }
+.modal-left img { width: 100%; max-height: 400px; object-fit: contain; }
+.modal-right { flex: 1; }
+
+.modal-category { text-transform: uppercase; color: #999; font-size: 14px; }
+.modal-desc { margin: 20px 0; color: #555; line-height: 1.8; }
+.modal-price { font-size: 28px; font-weight: bold; color: #000000; margin-bottom: 20px; }
+
+/* Responsive cho mobile */
+@media (max-width: 768px) {
+    .modal-body { flex-direction: column; }
+    .modal-content { width: 95%; margin: 10% auto; padding: 15px; }
+}
+
+.cart-item {
+    display: flex;
+    align-items: center; /* Căn giữa ảnh và chữ theo chiều dọc */
+    gap: 15px;
+    padding: 15px;
+    background: white;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.cart-item img {
+    width: 60px;       /* Độ rộng ảnh sản phẩm trong giỏ */
+    height: 60px;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+.item-info {
+    flex: 1;           /* Đẩy nút Xóa về phía bên phải */
+}
+
+.main-footer {
+    background-color: black;
+    color: #dddddd;
+    margin-top: 50px;
+    font-size: 14px;
+}
+
+
+
+
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-column h3 {
+    color: white;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+    color: #ccc;
+    text-decoration: none;
+}
+
+.footer-column ul li a:hover {
+    text-decoration: underline;
+}
+
+.social-icons {
+    margin-top: 15px;
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons a {
+    color: white;
+    font-size: 20px;
+}
+
+.contact-info li i {
+    width: 25px;
+    color: #febd69; /* Màu vàng cam làm điểm nhấn giống Header */
+}
+
+.footer-bottom {
+    background-color: #131a22;
+    padding: 30px 0;
+    text-align: center;
+    border-top: 1px solid #ffffff;
+}
+
+:root {
+    --amazon-dark: #131921;
+    --amazon-light: #232f3e;
+    --amazon-orange: #febd69;
+}
+
+/* Header & Sub-nav */
+.main-header { background-color: var(--amazon-dark); color: white; padding: 10px 0; }
+.header-grid { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+
+.category-btn {
+    border: 1px solid #888;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sub-nav { background-color: var(--amazon-light); color: white; padding: 8px 0; }
+.sub-nav ul { display: flex; list-style: none; gap: 15px; }
+.sub-nav a { color: white; text-decoration: none; font-size: 14px; border: 1px solid transparent; padding: 5px; }
+.sub-nav a:hover { border: 1px solid white; }
+
+/* Sidebar */
+.sidebar-menu {
+    position: fixed; left: -300px; top: 0; width: 300px; height: 100%;
+    background: white; z-index: 1000; transition: 0.3s;
+}
+.sidebar-menu.active { left: 0; }
+#sidebar-overlay {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7); z-index: 999;
+}
+
+/* Toast Message thay thế Alert */
+.toast {
+    position: fixed; top: 20px; right: 20px; background: #2ecc71;
+    color: white; padding: 15px 25px; border-radius: 4px; z-index: 2000;
+}
+
+
+
